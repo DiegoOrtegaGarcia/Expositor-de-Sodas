@@ -1,77 +1,8 @@
 <script setup lang="ts">
-  import gsap from 'gsap'
-  import { ScrollTrigger } from 'gsap/ScrollTrigger'
-  import { SplitText } from 'gsap/SplitText'
-  import { nextTick, onMounted, ref } from 'vue'
-  import { setTextRef } from '@/helpers/arrayTextRef'
+  import { useDashboard } from '@/hooks/useDashboard'
 
-  gsap.registerPlugin(ScrollTrigger, SplitText)
-  const dasbordRef = ref<HTMLElement>()
-  const textRefs = ref<HTMLElement[]>([])
+  const { setAnimation, smoothScrollTo } = useDashboard()
 
-  const setAnimation = (el: Element | ComponentPublicInstance | null, index: number) => {
-    setTextRef(el, index, textRefs)
-  }
-
-  const animeteDashBoard = () => {
-    if (!dasbordRef.value) return
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.app',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1,
-      },
-    })
-
-    tl.to(dasbordRef.value, {
-      opacity: 0,
-      duration: 0.5,
-    })
-  }
-
-  const initialAnimation = () => {
-    const tl = gsap.timeline({})
-    tl.from('.DasboardTitle', {
-      y: -20,
-      x: -10,
-      opacity: 0.3,
-      color: 'gray',
-      ease: 'power2.inOut',
-      duration: 1,
-    })
-
-    // Esperar a que las referencias estén listas
-    nextTick(() => {
-      for (const [index, text] of textRefs.value.entries()) {
-        if (text && text.textContent?.trim()) {
-          const textAnimation = SplitText.create(text, {
-            type: 'words, chars',
-            wordsClass: 'word',
-            charsClass: 'char',
-          })
-          tl.from(textAnimation.chars, {
-            y: -10,
-            opacity: 0.001,
-            stagger: {
-              each: 0.05,
-              from: 'center',
-            },
-            color: 'red',
-            duration: 0.8,
-          }, index * 0.2)
-        }
-      }
-    })
-  }
-
-  onMounted(() => {
-    nextTick(() => {
-      initialAnimation()
-      animeteDashBoard()
-    })
-  })
 </script>
 
 <template>
@@ -102,6 +33,7 @@
         class="mx-1 nav-btn"
         color="white"
         variant="text"
+        @click="smoothScrollTo(`.Info`)"
       >
         <span :ref="el => setAnimation(el, 0)" class="button-text">Inicio</span>
         <v-icon color="red-darken-2" right>mdi-home</v-icon>
@@ -111,6 +43,7 @@
         class="mx-1 nav-btn"
         color="white"
         variant="text"
+        @click="smoothScrollTo(`.ChanceSection`)"
       >
         <span :ref="el => setAnimation(el, 1)" class="button-text">Refrescos</span>
         <v-icon color="red-darken-2" right>mdi-star</v-icon>

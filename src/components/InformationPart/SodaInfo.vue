@@ -1,56 +1,14 @@
 <script setup lang="ts">
-  import gsap from 'gsap'
-  import { SplitText } from 'gsap/SplitText'
-  import { SODAS } from '@/constants/constants'
-  import { setTextRef } from '@/helpers/arrayTextRef'
-  import { useSodaStore } from '@/stores/app'
+  import { useSodaInfo } from '@/hooks/useSodaInfo'
 
-  const sodaStorage = useSodaStore()
-  const containersRef = ref([])
-  gsap.registerPlugin(SplitText)
+  const { setContainerRef, setTextRef, currentSoda } = useSodaInfo()
 
-  const setAnimation = (el: Element | ComponentPublicInstance | null, index: number) => {
-    setTextRef(el, index, containersRef)
-  }
-
-  const animateContainer = () => {
-    const tl = gsap.timeline({})
-    for (const container of containersRef.value) {
-      tl.from(container, {
-        y: 50,
-        opacity: 0.001,
-        ease: 'sine.inOut',
-        color: 'red',
-        duration: 0.8,
-        scale: 1.3,
-      }, 0.5)
-
-      const textAnimation = SplitText.create(container, { type: 'words' })
-
-      tl.from(textAnimation.words, {
-        y: -10,
-        x: -10,
-        rotate: -10,
-        opacity: 0.01,
-        stagger: {
-          each: 0.05,
-          from: 'center',
-        },
-        color: 'red',
-        duration: 0.8,
-      }, 0.5)
-    }
-  }
-
-  onMounted(() => {
-    animateContainer()
-  })
 </script>
 
 <template>
-  <div class="h-screen w-100 d-flex align-center justify-sm-space-between px-4">
+  <div class="h-screen w-100 d-flex align-center justify-sm-space-between px-4 Info">
     <!-- Card izquierda - Información compacta -->
-    <div :ref="el => setAnimation(el, 0)">
+    <div :ref="el => setContainerRef(el, 0)">
       <v-card
         class="soda-card left-card ma-10"
         elevation="0"
@@ -58,7 +16,7 @@
         width="280"
       >
         <v-card-title class="text-h5 font-weight-bold white--text text-center pa-3">
-          {{ SODAS[sodaStorage.currentSodaIndex].name }}
+          <span :ref="el => setTextRef(el, 0)">{{ currentSoda.name }}</span>
         </v-card-title>
 
         <v-divider class="mx-3 my-2 neon-divider" />
@@ -68,13 +26,13 @@
             <v-col class="py-1" cols="6">
               <div class="text-caption grey--text text--lighten-2">Precio:</div>
               <div class="text-h6 font-weight-bold neon-red--text">
-                ${{ SODAS[sodaStorage.currentSodaIndex].price }}
+                <span :ref="el => setTextRef(el, 1)">${{ currentSoda.price }}</span>
               </div>
             </v-col>
             <v-col class="py-1" cols="6">
               <div class="text-caption grey--text text--lighten-2">Calorías:</div>
               <div class="text-h6 font-weight-bold white--text">
-                {{ SODAS[sodaStorage.currentSodaIndex].calories }}
+                <span :ref="el => setTextRef(el, 2)">{{ currentSoda.calories }}</span>
               </div>
             </v-col>
           </v-row>
@@ -83,7 +41,7 @@
             <v-col class="py-1" cols="6">
               <div class="text-caption grey--text text--lighten-2">Tamaño:</div>
               <div class="text-body-1 font-weight-bold white--text">
-                {{ SODAS[sodaStorage.currentSodaIndex].size }}
+                <span :ref="el => setTextRef(el, 3)">{{ currentSoda.size }}</span>
               </div>
             </v-col>
           </v-row>
@@ -91,7 +49,7 @@
           <div class="mb-2">
             <div class="text-caption grey--text text--lighten-2 mb-1">Sabor:</div>
             <div class="text-body-2 white--text">
-              {{ SODAS[sodaStorage.currentSodaIndex].flavor }}
+              <span :ref="el => setTextRef(el, 4)">{{ currentSoda.flavor }}</span>
             </div>
           </div>
 
@@ -102,11 +60,11 @@
                 background-color="grey darken-2"
                 class="neon-rating"
                 color="#ff2a6d"
-                :length="SODAS[sodaStorage.currentSodaIndex].rating"
+                :length="currentSoda.rating"
                 readonly
                 size="18"
               />
-              <span class="ml-2 text-caption white--text">{{ SODAS[sodaStorage.currentSodaIndex].rating }}</span>
+              <span :ref="el => setTextRef(el, 5)" class="ml-2 text-caption white--text">{{ currentSoda.rating }}</span>
             </div>
           </div>
         </v-card-text>
@@ -114,59 +72,59 @@
     </div>
 
     <!-- Card derecha - Información adicional compacta -->
-    <div :ref="el => setAnimation(el, 1)"><v-card
-      class="soda-card right-card ma-10"
-      elevation="0"
-      min-height="320"
-      width="280"
-    >
-      <v-card-text class="pa-3">
-        <v-row class="mb-2">
-          <v-col class="py-1" cols="6">
-            <div class="text-caption grey--text text--lighten-2">Azúcar:</div>
-            <div class="text-h6 font-weight-bold neon-red--text">
-              {{ SODAS[sodaStorage.currentSodaIndex].sugar }}g
-            </div>
-          </v-col>
-          <v-col class="py-1" cols="6">
-            <div class="text-caption grey--text text--lighten-2">Cafeína:</div>
-            <div class="text-h6 font-weight-bold white--text">
-              {{ SODAS[sodaStorage.currentSodaIndex].caffeine }}mg
-            </div>
-          </v-col>
-        </v-row>
+    <div :ref="el => setContainerRef(el, 1)">
+      <v-card
+        class="soda-card right-card ma-10"
+        elevation="0"
+        min-height="320"
+        width="280"
+      >
+        <v-card-text class="pa-3">
+          <v-row class="mb-2">
+            <v-col class="py-1" cols="6">
+              <div class="text-caption grey--text text--lighten-2">Azúcar:</div>
+              <div class="text-h6 font-weight-bold neon-red--text">
+                <span :ref="el => setTextRef(el, 6)">{{ currentSoda.sugar }}g</span>
+              </div>
+            </v-col>
+            <v-col class="py-1" cols="6">
+              <div class="text-caption grey--text text--lighten-2">Cafeína:</div>
+              <div class="text-h6 font-weight-bold white--text">
+                <span :ref="el => setTextRef(el, 7)">{{ currentSoda.caffeine }}mg</span>
+              </div>
+            </v-col>
+          </v-row>
 
-        <div class="mb-2">
-          <div class="text-caption grey--text text--lighten-2 mb-1">Ingredientes:</div>
-          <div class="d-flex flex-wrap">
-            <v-chip
-              v-for="(ingredient, index) in SODAS[sodaStorage.currentSodaIndex].ingredients.slice(0, 3)"
-              :key="index"
-              class="ma-1 neon-chip"
-              dark
-              x-small
-            >
-              {{ ingredient }}
-            </v-chip>
+          <div class="mb-2">
+            <div class="text-caption grey--text text--lighten-2 mb-1">Ingredientes:</div>
+            <div class="d-flex flex-wrap">
+              <v-chip
+                v-for="(ingredient, index) in currentSoda.ingredients.slice(0, 3)"
+                :key="index"
+                class="ma-1 neon-chip"
+                dark
+                x-small
+              >
+                <span :ref="el => setTextRef(el, 8 + index)">{{ ingredient }}</span>
+              </v-chip>
+            </div>
           </div>
-        </div>
 
-        <div class="mb-3">
-          <div class="text-caption grey--text text--lighten-2 mb-1">Beneficios:</div>
-          <ul class="pl-3 ma-0">
-            <li
-              v-for="(benefit, index) in SODAS[sodaStorage.currentSodaIndex].benefits.slice(0, 2)"
-              :key="index"
-              class="text-caption mb-1 white--text"
-            >
-              {{ benefit }}
-            </li>
-          </ul>
-        </div>
-      </v-card-text>
-    </v-card>
+          <div class="mb-3">
+            <div class="text-caption grey--text text--lighten-2 mb-1">Beneficios:</div>
+            <ul class="pl-3 ma-0">
+              <li
+                v-for="(benefit, index) in currentSoda.benefits.slice(0, 2)"
+                :key="index"
+                class="text-caption mb-1 white--text"
+              >
+                <span :ref="el => setTextRef(el, 11 + index)">{{ benefit }}</span>
+              </li>
+            </ul>
+          </div>
+        </v-card-text>
+      </v-card>
     </div>
-
   </div>
 </template>
 
@@ -334,5 +292,14 @@
 /* Clase global para el color neón */
 .neon-red--text {
   color: #ff2a2a !important;
+}
+
+/* Estilos para la animación de texto */
+.char {
+  display: inline-block;
+}
+
+.word {
+  white-space: nowrap;
 }
 </style>

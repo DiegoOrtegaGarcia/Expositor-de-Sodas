@@ -11,10 +11,13 @@ declare module 'vue' {
     AbsoluteComponent: typeof import('./components/AbsoluteComponent.vue')['default']
     AnimetScroll: typeof import('./components/AnimetScroll.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
+    ChanceSectio: typeof import('./components/ChageSection/ChanceSectio.vue')['default']
     Dashboard: typeof import('./components/Dashboard/Dashboard.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    InformationComponent: typeof import('./components/informationComponent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SodaInfo: typeof import('./components/InformationPart/SodaInfo.vue')['default']
+    SodaModelComponent: typeof import('./components/sodaModel/SodaModelComponent.vue')['default']
   }
 }
