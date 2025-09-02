@@ -55,7 +55,7 @@ Instalar dependencias
 
 bash
 npm install
-# o
+ o
 yarn install
 Servidor de desarrollo
 
