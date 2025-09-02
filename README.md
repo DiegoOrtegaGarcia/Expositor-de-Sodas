@@ -1,81 +1,200 @@
-# Vuetify (Default)
+🥤 Soda Expoxition - Experiencia 3D de Refrescos
+https://img.shields.io/badge/Vue.js-3-4FC08D?logo=vuedotjs
+https://img.shields.io/badge/TypeScript-4-3178C6?logo=typescript
+https://img.shields.io/badge/Three.js-R128-000000?logo=threedotjs
+https://img.shields.io/badge/GSAP-3-88CE02?logo=greensock
+https://img.shields.io/badge/Vuetify-3-1867C0?logo=vuetify
 
-This is the official scaffolding tool for Vuetify, designed to give you a head start in building your new Vuetify application. It sets up a base template with all the necessary configurations and standard directory structure, enabling you to begin development without the hassle of setting up the project from scratch.
+Una experiencia web inmersiva que muestra latas de refresco en 3D con animaciones fluidas y información detallada de cada producto.
 
-## ❗️ Important Links
+✨ Características Principales
+🎨 Visualización 3D: Modelos 3D interactivos de latas de refresco
 
-- 📄 [Docs](https://vuetifyjs.com/)
-- 🚨 [Issues](https://issues.vuetifyjs.com/)
-- 🏬 [Store](https://store.vuetifyjs.com/)
-- 🎮 [Playground](https://play.vuetifyjs.com/)
-- 💬 [Discord](https://community.vuetifyjs.com)
+⚡ Animaciones Avanzadas: Transiciones suaves con GSAP
 
-## 💿 Install
+📱 Interactividad: Navegación intuitiva entre diferentes refrescos
 
-Set up your project using your preferred package manager. Use the corresponding command to install the dependencies:
+🎨 Diseño Moderno: Interfaz con temática neón y efectos visuales
 
-| Package Manager                                                | Command        |
-|---------------------------------------------------------------|----------------|
-| [yarn](https://yarnpkg.com/getting-started)                   | `yarn install` |
-| [npm](https://docs.npmjs.com/cli/v7/commands/npm-install)     | `npm install`  |
-| [pnpm](https://pnpm.io/installation)                          | `pnpm install` |
-| [bun](https://bun.sh/#getting-started)                        | `bun install`  |
+🚀 Performance: Carga optimizada y animaciones eficientes
 
-After completing the installation, your environment is ready for Vuetify development.
+🛠️ Tecnologías Utilizadas
+Frameworks Principales
+Vue 3 - Framework principal con Composition API
 
-## ✨ Features
+TypeScript - Tipado estático para mayor robustez
 
-- 🖼️ **Optimized Front-End Stack**: Leverage the latest Vue 3 and Vuetify 3 for a modern, reactive UI development experience. [Vue 3](https://v3.vuejs.org/) | [Vuetify 3](https://vuetifyjs.com/en/)
-- 🗃️ **State Management**: Integrated with [Pinia](https://pinia.vuejs.org/), the intuitive, modular state management solution for Vue.
-- 🚦 **Routing and Layouts**: Utilizes Vue Router for SPA navigation and vite-plugin-vue-layouts-next for organizing Vue file layouts. [Vue Router](https://router.vuejs.org/) | [vite-plugin-vue-layouts-next](https://github.com/loicduong/vite-plugin-vue-layouts-next)
-- 💻 **Enhanced Development Experience**: Benefit from TypeScript's static type checking and the ESLint plugin suite for Vue, ensuring code quality and consistency. [TypeScript](https://www.typescriptlang.org/) | [ESLint Plugin Vue](https://eslint.vuejs.org/)
-- ⚡ **Next-Gen Tooling**: Powered by Vite, experience fast cold starts and instant HMR (Hot Module Replacement). [Vite](https://vitejs.dev/)
-- 🧩 **Automated Component Importing**: Streamline your workflow with unplugin-vue-components, automatically importing components as you use them. [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
-- 🛠️ **Strongly-Typed Vue**: Use vue-tsc for type-checking your Vue components, and enjoy a robust development experience. [vue-tsc](https://github.com/johnsoncodehk/volar/tree/master/packages/vue-tsc)
+Vuetify 3 - Componentes UI material design
 
-These features are curated to provide a seamless development experience from setup to deployment, ensuring that your Vuetify application is both powerful and maintainable.
+Gráficos 3D y Animaciones
+TresJS - Vue wrapper para Three.js
 
-## 💡 Usage
+GSAP - Animaciones profesionales y scroll-triggered
 
-This section covers how to start the development server and build your project for production.
+GLTF Loader - Carga eficiente de modelos 3D
 
-### Starting the Development Server
+Estado y Gestión
+Pinia - State management moderno
 
-To start the development server with hot-reload, run the following command. The server will be accessible at [http://localhost:3000](http://localhost:3000):
+Vue Router - Navegación SPA
 
-```bash
+📦 Estructura del Proyecto
+text
+src/
+├── components/          # Componentes Vue
+│   ├── Dashboard.vue   # Barra de navegación animada
+│   ├── SodaInfo.vue    # Información de productos
+│   └── ChanceSectio.vue # Selector de refrescos
+├── hooks/              # Custom Composition API hooks
+│   ├── useIndex.ts     # Lógica principal 3D
+│   ├── useSodaInfo.ts  # Animaciones de información
+│   ├── useDashboard.ts # Animaciones del navbar
+│   └── useChanceSection.ts # Navegación productos
+├── stores/             # Gestión de estado con Pinia
+│   └── app.ts         # Estado global de la aplicación
+├── constants/          # Datos y configuraciones
+│   └── constants.ts   # Información de los refrescos
+└── helpers/            # Utilidades
+    └── arrayTextRef.ts # Manejo de referencias
+🚀 Instalación y Uso
+Prerrequisitos
+Node.js 16+
+
+npm o yarn
+
+Instalación
+Clonar el repositorio
+
+bash
+git clone https://github.com/tu-usuario/soda-expoxition.git
+cd soda-expoxition
+Instalar dependencias
+
+bash
+npm install
+# o
+yarn install
+Servidor de desarrollo
+
+bash
+npm run dev
+# o
 yarn dev
-```
+Compilar para producción
 
-(Repeat for npm, pnpm, and bun with respective commands.)
-
-> Add NODE_OPTIONS='--no-warnings' to suppress the JSON import warnings that happen as part of the Vuetify import mapping. If you are on Node [v21.3.0](https://nodejs.org/en/blog/release/v21.3.0) or higher, you can change this to NODE_OPTIONS='--disable-warning=5401'. If you don't mind the warning, you can remove this from your package.json dev script.
-
-### Building for Production
-
-To build your project for production, use:
-
-```bash
+bash
+npm run build
+# o
 yarn build
-```
+🎮 Cómo Usar
+Navegación Principal:
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+Usa la barra de navegación superior para saltar entre secciones
 
-Once the build process is completed, your application will be ready for deployment in a production environment.
+Scroll suave entre las diferentes vistas
 
-## 💪 Support Vuetify Development
+Visualización 3D:
 
-This project is built with [Vuetify](https://vuetifyjs.com/en/), a UI Library with a comprehensive collection of Vue components. Vuetify is an MIT licensed Open Source project that has been made possible due to the generous contributions by our [sponsors and backers](https://vuetifyjs.com/introduction/sponsors-and-backers/). If you are interested in supporting this project, please consider:
+Observa la lata actual en el centro de la pantalla
 
-- [Requesting Enterprise Support](https://support.vuetifyjs.com/)
-- [Sponsoring John on Github](https://github.com/users/johnleider/sponsorship)
-- [Sponsoring Kael on Github](https://github.com/users/kaelwd/sponsorship)
-- [Supporting the team on Open Collective](https://opencollective.com/vuetify)
-- [Becoming a sponsor on Patreon](https://www.patreon.com/vuetify)
-- [Becoming a subscriber on Tidelift](https://tidelift.com/subscription/npm/vuetify)
-- [Making a one-time donation with Paypal](https://paypal.me/vuetify)
+Animación automática de flotación
 
-## 📑 License
-[MIT](http://opensource.org/licenses/MIT)
+Cambio de Productos:
 
-Copyright (c) 2016-present Vuetify, LLC
+Haz scroll hasta la sección inferior
+
+Usa los botones de flecha para navegar entre refrescos
+
+Las animaciones se actualizan automáticamente
+
+Información del Producto:
+
+Tarjetas laterales con detalles del refresco
+
+Animaciones de texto al cambiar productos
+
+Efectos visuales al hacer hover
+
+🎨 Personalización
+Añadir Nuevos Refrescos
+Edita src/constants/constants.ts:
+
+typescript
+export const SODAS = [
+  {
+    name: "Nueva Soda",
+    price: 23,
+    calories: 130,
+    size: '500ml',
+    available: true,
+    sugar: 32,
+    caffeine: 0,
+    flavor: 'Manzana Canela',
+    rating: 4.1,
+    ingredients: ['Agua carbonatada', 'Jugo manzana', 'Azúcar morena', 'Canela', 'Aromas'],
+    benefits: ['Sabor único', 'Aroma canela', 'Sin cafeína'],
+  }
+  // ... otros refrescos
+]
+Modificar Modelos 3D
+Coloca modelos GLTF en public/models/
+
+Actualiza la ruta en useIndex.ts:
+
+typescript
+const { nodes } = await useGLTF(`/models/${index}/nuevo-modelo.gltf`)
+Customizar Animaciones
+Modifica los hooks en src/hooks/:
+
+typescript
+// Ejemplo: Modificar animación de entrada
+tl.from(SodaRef.value.position, {
+  x: -10, // Mayor distancia
+  y: 8,   // Mayor altura
+  
+  duration: 2.0 // Más lento
+})
+📱 Responsive Design (Se Esta Desarrollando para Adaptarlo a todos los posibles)
+El proyecto incluye breakpoints para:
+
+Desktop: 1200px+
+
+Tablet: 768px - 1199px
+
+Mobile: 320px - 767px
+
+🚀 Performance Tips
+Los modelos 3D usan compresión Draco
+
+Animaciones optimizadas con GSAP
+
+Lazy loading de componentes
+
+Assets comprimidos y optimizados
+
+🤝 Contribuir
+Fork el proyecto
+
+Crea tu feature branch (git checkout -b feature/AmazingFeature)
+
+Commit tus cambios (git commit -m 'Add some AmazingFeature')
+
+Push al branch (git push origin feature/AmazingFeature)
+
+Abre un Pull Request
+
+
+🙌 Reconocimientos
+Three.js por la potente librería 3D
+
+GSAP por las increíbles animaciones
+
+Vuetify por los componentes UI
+
+Vue.js por el framework reactivo
+
+
+⭐️ Hecho con Vue 3, Three.js y mucho ☕️
+
+📄 Licencia
+Este proyecto está bajo la Licencia MIT. Ver el archivo LICENSE para más detalles.
