@@ -39,24 +39,6 @@ Pinia - State management moderno
 
 Vue Router - Navegación SPA
 
-📦 Estructura del Proyecto
-text
-src/
-├── components/          # Componentes Vue
-│   ├── Dashboard.vue   # Barra de navegación animada
-│   ├── SodaInfo.vue    # Información de productos
-│   └── ChanceSectio.vue # Selector de refrescos
-├── hooks/              # Custom Composition API hooks
-│   ├── useIndex.ts     # Lógica principal 3D
-│   ├── useSodaInfo.ts  # Animaciones de información
-│   ├── useDashboard.ts # Animaciones del navbar
-│   └── useChanceSection.ts # Navegación productos
-├── stores/             # Gestión de estado con Pinia
-│   └── app.ts         # Estado global de la aplicación
-├── constants/          # Datos y configuraciones
-│   └── constants.ts   # Información de los refrescos
-└── helpers/            # Utilidades
-    └── arrayTextRef.ts # Manejo de referencias
 🚀 Instalación y Uso
 Prerrequisitos
 Node.js 16+
